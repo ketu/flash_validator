@@ -9,14 +9,15 @@ class BaseRule(object):
     def __init__(self, pattern=None):
         self.pattern = pattern
 
-    def validate(self, value):
+    def validate(self, value=None):
         return True
 
 
 class RequiredRule(BaseRule):
     error_message = "%s is required"
 
-    def validate(self, value):
+    def validate(self, value=None):
+        print(value)
         if not value:
             return False
         return True
@@ -30,7 +31,7 @@ class RegexRule(BaseRule):
 
         super(RegexRule, self).__init__(pattern)
 
-    def validate(self, value):
+    def validate(self, value=None):
         group = self.pattern.fullmatch(str(value))
         if not group:
             return False

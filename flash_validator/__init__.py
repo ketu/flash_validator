@@ -4,18 +4,24 @@ from .rule import BaseRule, RequiredRule, RegexRule
 from .error import ValidationError
 from . import extra_source
 
+
 def validator(*params):
     def validate_request(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            errors, args = validate(params)
+            args = apply_validation(params)
             return func(*args)
         return wrapper
 
     return validate_request
 
 
-def validate(params):
-    for condition in params:
-        condition.apply()
+def apply_validation(params):
+    values = []
+    for cond in params:
+        value = cond.apply()
+        values.append(value)
+    return  values
+
+
 

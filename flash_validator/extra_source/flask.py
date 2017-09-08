@@ -5,7 +5,7 @@ try :
 except ImportError as e:
     print(e)
 
-from ...source import BaseSource
+from ..source import BaseSource
 
 
 class FlaskRequestSource(BaseSource):
