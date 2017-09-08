@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
@@ -18,7 +18,7 @@ setup(
     author_email='ketu.lai@gmail.com',
     license='MIT',
     keywords='python data validation',
-    packages=['flash_validator'],
+    packages= find_packages(),
     install_requires=[],
     tests_require=[],
 )
