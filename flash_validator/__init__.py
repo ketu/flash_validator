@@ -2,6 +2,7 @@ from functools import wraps
 from .condition import Condition
 from .rule import BaseRule, RequiredRule, RegexRule
 from .error import ValidationError
+from . import extra_source
 
 def validator(*params):
     def validate_request(func):
