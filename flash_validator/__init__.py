@@ -1,6 +1,6 @@
 from functools import wraps
 from .condition import Condition
-from .rule import BaseRule, RequiredRule, RegexRule
+from . import rule as rules
 from .error import ValidationError
 from . import extra_source
 
@@ -21,7 +21,7 @@ def apply_validation(params):
     for cond in params:
         value = cond.apply()
         values.append(value)
-    return  values
+    return values
 
 
 
