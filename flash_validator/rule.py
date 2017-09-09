@@ -2,6 +2,7 @@
 # -*- coding:utf8 -*-
 import re
 
+__all__ = ['BaseRule', 'RequiredRule', 'RegexRule']
 
 class BaseRule(object):
     error_message = "%s can not pass the rule"

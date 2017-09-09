@@ -34,6 +34,4 @@ class FlaskQuerySource(FlaskRequestSource):
 
 class FlaskJsonSource(FlaskRequestSource):
     def find_field_value(self, field):
-        print(request)
-        print(request.get_json())
         return request.get_json(force=True).get(field)

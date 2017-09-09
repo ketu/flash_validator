@@ -2,7 +2,9 @@
 # -*- coding:utf8 -*-
 from .source import BaseSource, DictSource
 from .error import ValidationError
+from .rule import BaseRule
 
+__all__ = ['Condition']
 
 class Condition(object):
 
@@ -14,7 +16,6 @@ class Condition(object):
         self.source = source
 
     def get_source_data(self):
-
         if isinstance(self.source, dict):
             return DictSource(self.source)
 
@@ -33,15 +34,13 @@ class Condition(object):
         return find_field_value_func(self.field)
 
     def apply(self):
-        value = None
-        try:
-            value = self.get_value_from_source()
-        except Exception as e:
-            print(e)
+        value = self.get_value_from_source()
 
         for r in self.rules:
-            is_passed = r.validate(value)
+            if not isinstance(r, BaseRule):
+                raise TypeError("rule must be instance of BaseRule")
 
+            is_passed = r.validate(value)
             if not is_passed:
                 raise ValidationError(r, self.field)
 
