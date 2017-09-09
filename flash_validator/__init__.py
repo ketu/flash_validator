@@ -5,12 +5,13 @@ from .error import ValidationError
 
 __all__ = ["Condition", "rule", "ValidationError", "validator"]
 
+
 def validator(*params):
     def validate_request(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            args = apply_validation(params)
-            return func(*args)
+            cleaned_args = apply_validation(params)
+            return func(*args, **kwargs)
         return wrapper
 
     return validate_request
