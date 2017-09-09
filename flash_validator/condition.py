@@ -33,8 +33,11 @@ class Condition(object):
         return find_field_value_func(self.field)
 
     def apply(self):
-
-        value = self.get_value_from_source()
+        value = None
+        try:
+            value = self.get_value_from_source()
+        except Exception as e:
+            print(e)
 
         for r in self.rules:
             is_passed = r.validate(value)

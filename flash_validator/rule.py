@@ -17,7 +17,6 @@ class RequiredRule(BaseRule):
     error_message = "%s is required"
 
     def validate(self, value=None):
-        print(value)
         if not value:
             return False
         return True
@@ -32,8 +31,11 @@ class RegexRule(BaseRule):
         super(RegexRule, self).__init__(pattern)
 
     def validate(self, value=None):
+        if not value:
+            return False
         group = self.pattern.fullmatch(str(value))
-        if not group:
+
+        if not group or not group.group():
             return False
         return True
 

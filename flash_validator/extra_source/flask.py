@@ -9,7 +9,12 @@ from ..source import BaseSource
 
 
 class FlaskRequestSource(BaseSource):
-    pass
+    def __init__(self):
+        try:
+            self.request = request
+        except Exception as e:
+            raise e
+        super(FlaskRequestSource, self).__init__()
 
 
 class FlaskViewArgsSource(FlaskRequestSource):
@@ -29,4 +34,5 @@ class FlaskQuerySource(FlaskRequestSource):
 
 class FlaskJsonSource(FlaskRequestSource):
     def find_field_value(self, field):
+        print(request)
         return request.get_json(force=True).get(field)
